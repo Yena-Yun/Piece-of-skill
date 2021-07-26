@@ -2,13 +2,9 @@ import React from "react";
 import "./css/SearchBar.css";
 
 const SearchBar = ({ results, keyword, updateField }) => {
-  console.log(results);
-  console.log(keyword);
-  console.log(updateField);
 
   //input창에 사용자가 클릭한 항목의 text를 넣어주고 preview 항목을 지우는 함수
   var updateText = text => {
-    console.log(text);
     updateField("keyword", text);
     updateField("results", []);
   };
@@ -50,7 +46,6 @@ const SearchBar = ({ results, keyword, updateField }) => {
   );
 };
 
-//stateless component to render preview results
 const SearchPreview = ({ name, index, updateText }) => {
   return (
     <div

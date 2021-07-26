@@ -34,13 +34,9 @@ class App extends Component {
   };
 
   onSearch = text => {
-    // console.log(text);
-
     let data = this.state.data;
-    // console.log(data);
 
     var results = data.filter(item => true === this.matchName(item.name, text));
-    // console.log(results);
 
     this.setState({ results });
   };
