@@ -1,4 +1,7 @@
-/* Input */
+/*
+Input styles
+------------------
+*/
 .search-bar {
 	width: 400px;
 	padding: 15px 10px;
@@ -13,7 +16,10 @@
 	outline: none;
 }
 
-/* SearchBar container */
+/*
+SearchBar container
+*/
+
 .auto {
 	display: flex;
 	flex-direction: column;
@@ -23,13 +29,14 @@
 	padding-top: 20px;
 }
 
-/* Cancel button */
+/*Cancel button styles*/
+
 .cancel-btn {
 	color: rgb(99, 99, 99);
 	border: none;
 	outline: none;
 	font-weight: 500;
-
+	cursor: pointer;
 	z-index: 1;
 	transform: translate(185px, 32px) scale(1.15);
 }
@@ -47,7 +54,10 @@
 	opacity: 0;
 }
 
-/* search results container */
+/*
+search results container div
+*/
+
 .search-results {
 	display: flex;
 	flex-direction: column;
@@ -61,7 +71,10 @@
 	border-radius: 0.2rem;
 }
 
-/* SearchPreview Component */
+/*
+SearchPreview Component
+*/
+
 .search-preview {
 	transition: 1s;
 	display: flex;
@@ -71,6 +84,7 @@
 	border-top: 1px solid;
 	border-color: rgb(241, 241, 241);
 	align-items: baseline;
+	cursor: pointer;
 }
 
 .first {
