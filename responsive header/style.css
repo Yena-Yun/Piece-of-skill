@@ -16,7 +16,7 @@ header {
 	height: 10vh;
 	background-color: rgb(18, 15, 61);
 	color: #fff;
-	padding: 1rem 4rem;
+	padding: 1rem 3rem;
 
 	display: flex;
 	justify-content: space-around;
@@ -28,17 +28,26 @@ header {
 	cursor: pointer;
 }
 
-.logo-image img {
+.logo .logo-title {
+	display: flex;
+}
+
+.logo-title img {
 	display: block;
 	width: 50px;
 	height: 50px;
 }
 
-.logo-title {
+.logo-title span{
 	display: inline-block;
 	padding: 0.5rem 0 0 0.7rem;
 	font-size: 2rem;
 	font-weight: 700;
+}
+
+.logo .menu-btn {
+	width: 45px;
+	display: none;
 }
 
 .nav-bar {
@@ -47,7 +56,7 @@ header {
 
 .nav-bar .nav-btns {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	padding-top: 1.3rem;
 }
 
@@ -75,7 +84,7 @@ header {
 .share-link img:first-child {
 	width: 50px;
 	height: 50px;
-	margin-right: 2rem;
+	margin-right: 1.5rem;
 }
 
 .share-link img:last-child {
@@ -85,40 +94,65 @@ header {
 
 @media screen and (max-width: 992px) {
 	header {
-		width: 30%;
-		height: 100vh;
+		width: 100%;
+		height: 60vh;
 		flex-direction: column;
 		padding: 1rem 2rem;
-
 	}
 
 	.logo {
-		flex-direction: column;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
 	}
 
-	.logo-image img {
+	.logo-title img{
 		width: 45px;
 		height: 45px;
 	}
-
-	.logo-title {
+	
+	.logo-title span{
 		font-size: 1.7rem;
+		margin-left: 1rem;
 		padding: 0.5rem 0 0 0;
+	}
 
+	.logo .menu-btn {
+		display: block;
 	}
 
 	.nav-bar .nav-btns {
 		flex-direction: column;
+		text-align: center;
 	}
 
 	.nav-btns .nav-btn {
 		font-size: 1.3rem;
 		margin-bottom: 1.3rem;
 	}
-}
 
-@media screen and (max-width: 768px) {
-	header {
-		width: 250px;
+	.share-links {
+		padding: 0;
+		margin-bottom: 30px;
+		position: relative;
+	}
+
+	.share-link img {
+		display: block;
+		cursor: pointer;
+		text-align: center;
+	}
+	
+	.share-link img:first-child {
+		margin-right: 1.5rem;
+		position: absolute;
+		top: -22px;
+		left: -80px;
+	}
+
+	.share-link img:last-child {
+		position: absolute;
+		top: -20px;
+		left: 0;
 	}
 }
