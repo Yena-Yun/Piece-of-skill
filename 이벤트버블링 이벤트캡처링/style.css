@@ -1,0 +1,35 @@
+	body {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	div {
+		border: 1px solid black;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	.one {
+		width: 500px;
+		height: 350px;
+		background-color: rgb(206, 58, 58);
+	}
+
+	.two {
+		width: 350px;
+		height: 200px;
+		background-color: rgb(58, 68, 201);
+	}
+
+	.three {
+		width: 200px;
+		height: 80px;
+		background-color: rgb(168, 224, 94);
+	}
