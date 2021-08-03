@@ -1,27 +1,28 @@
-// var inputs = document.querySelectorAll('input');
+// 이벤트 위임 사용하기 전
+var inputs = document.querySelectorAll('input');
 
-// // 인풋 박스에 클릭 이벤트 리스너 추가
-// inputs.forEach(function (input) {
-// 	input.addEventListener('click', function (event) {
-// 		alert('clicked');
-// 	});
-// });
+// 인풋 박스에 클릭 이벤트 리스너 추가
+inputs.forEach(function (input) {
+	input.addEventListener('click', function (event) {
+		alert('clicked');
+	});
+});
 
-// // 새 리스트 아이템 추가
-// var itemList = document.querySelector('.itemList');
+// 새 리스트 아이템 추가
+var itemList = document.querySelector('.itemList');
 
-// var li = document.createElement('li');
-// var input = document.createElement('input');
-// var label = document.createElement('label');
-// var labelText = document.createTextNode(' 이벤트 위임 학습');
+var li = document.createElement('li');
+var input = document.createElement('input');
+var label = document.createElement('label');
+var labelText = document.createTextNode(' 이벤트 위임 학습');
 
-// input.setAttribute('type', 'checkbox');
-// input.setAttribute('id', 'item3');
-// label.setAttribute('for', 'item3');
-// label.appendChild(labelText);
-// li.appendChild(input);
-// li.appendChild(label);
-// itemList.appendChild(li);
+input.setAttribute('type', 'checkbox');
+input.setAttribute('id', 'item3');
+label.setAttribute('for', 'item3');
+label.appendChild(labelText);
+li.appendChild(input);
+li.appendChild(label);
+itemList.appendChild(li);
 
 
 // 인풋 박스에 클릭 이벤트 리스너를 추가하는 시점에서 리스트 아이템은 두 개이다
