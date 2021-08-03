@@ -13,17 +13,17 @@ function logEvent(event) {
 }
 
 
-// // 이벤트 캡처링
-// // addEventListener()의 옵션 객체에 capture:true를 설정
-// var divs = document.querySelectorAll('div');
+// 이벤트 캡처링
+// addEventListener()의 옵션 객체에 capture:true를 설정
+var divs = document.querySelectorAll('div');
 
-// divs.forEach(function (div) {
-// 	div.addEventListener('click', logEvent, {
-// 		capture: true
-// 	});
-// });
+divs.forEach(function (div) {
+	div.addEventListener('click', logEvent, {
+		capture: true
+	});
+});
 
-// function logEvent(event) {
-// 	event.stopPropagation();
-// 	console.log(event.currentTarget.className);
-// }
+function logEvent(event) {
+	event.stopPropagation();
+	console.log(event.currentTarget.className);
+}
