@@ -8,9 +8,10 @@ divs.forEach(function (div) {
 function logEvent(event) {
 	// 버블링이나 캡처링을 막고 싶다면 
 	// 이벤트 발생 시 실행되는 함수에 event.stopPropagation() 추가
-	event.stopPropagation();
+	// event.stopPropagation();
 	console.log(event.currentTarget.className);
 }
+
 
 
 // 이벤트 캡처링
@@ -24,6 +25,6 @@ divs.forEach(function (div) {
 });
 
 function logEvent(event) {
-	event.stopPropagation();
+	// event.stopPropagation();
 	console.log(event.currentTarget.className);
 }
