@@ -25,3 +25,7 @@
 6. 이벤트 버블링, 캡처링, 위임
    참고사이트: 캡틴판교 <br />
    https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
+   
+7. async study - async 예시(useState) 연습
+   참고사이트: 코딩애플 React 강의 Part3 - state 변경할 때 주의점: async <br/>
+   https://online.codingapple.com/
