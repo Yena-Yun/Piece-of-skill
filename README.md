@@ -20,3 +20,7 @@
    
 5. router tutorial - 리액트 라우터 연습 <br/>
    참고서적: '리액트를 다루는 기술' — Router 예제
+
+6. 이벤트 버블링, 캡처링, 위임
+   참고사이트: 캡틴판교 <br />
+   https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
