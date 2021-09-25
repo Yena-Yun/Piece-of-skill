@@ -17,11 +17,14 @@ class App extends Component {
     ],
     // keyword = 인풋창 안의 내용
     keyword: '',
-    // results = 자동완성 preview항목 내용
+    // results = 자동완성 preview 내용
     results: [],
+    // count = 항목을 클릭한 횟수(조회수)
+    count: 0,
   };
 
   // 2. item의 name 중에 keyword를 포함하는 item이 있는지 확인하는 기능
+  // 문제점: 찾기 위한 기준마다 내용이 비슷한 함수들 -> 나중에 리팩토링
   matchName = (name, keyword) => {
     var keyLen = keyword.length;
 
@@ -42,7 +45,7 @@ class App extends Component {
     return position === keyword;
   };
 
-  // 3. match 함수로 거른 item을 state에 넣어주는 역할만 하는 기능
+  // 3. 키워드로 검색(match 함수로 거른 item을 state에 넣어주는 역할)
   onSearch = (text) => {
     let data = this.state.data;
 
@@ -72,11 +75,11 @@ class App extends Component {
 
   render() {
     // SearchBar에서 updateField 함수 처리를 할 수 있게 keyword와 results 키의 value 자리를 가져옴
-    let { results, keyword } = this.state; // (비구조화 할당)
+    let { results, keyword, count } = this.state; // (비구조화 할당)
 
     return (
       <div className='App'>
-        <SearchBar results={results} keyword={keyword} updateField={this.updateField} />
+        <SearchBar results={results} keyword={keyword} count={count} updateField={this.updateField} />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/SearchBar.css';
 
-const SearchBar = ({ results, keyword, updateField }) => {
+const SearchBar = ({ results, keyword, count, updateField }) => {
   // results: onChange로 updateField 함수가 실행될 때마다 filter된 item들을 보여줄 배열 (= 자동완성 Preview 항목에 보여질 내용)
   console.log(results);
 
@@ -11,24 +11,26 @@ const SearchBar = ({ results, keyword, updateField }) => {
     updateField('keyword', '');
   };
 
-  // updateText: Preview에서 선택(클릭)한 항목이 있을 때만 실행되는 함수!!
+  // updateText: Preview에서 항목을 클릭했을 때만 실행되는 함수!!
   var updateText = (text) => {
-    // state의 keyword 키의 value로 입력한 값(text)을 넣음
-    //  => 클릭한 항목의 내용을 입력창 안에 보여줌
+    // state의 keyword 키의 value로 입력한 값(text)
+    //  => 클릭한 항목의 content를 입력창에 표시
     updateField('keyword', text);
-    // state의 results 키의 value로 빈 배열 업데이트
-    //  => 사용자가 특정 항목을 선택하고 나면 preview의 항목 내용을 삭제
+    // state의 results 키의 value로 빈 배열
+    //  => 사용자가 특정 항목을 선택하고 나면 preview 항목을 삭제
     updateField('results', []);
+    // state의 count 키의 value를 1 증가
+    updateField('count', count + 1);
   };
 
   return (
     <div className='auto'>
-      {/* x 버튼 클릭 시 인풋창 내용 삭제 */}
+      {/* x 버튼 클릭 - 인풋창 내용 삭제 */}
       <button onClick={() => cancelSearch()} className={`cancel-btn ${keyword.length > 0 ? 'active' : 'inactive'}`}>
         x
       </button>
 
-      {/* 사용자가 입력을 시작하면 바로 updateField 함수에 field로 'keyword' 키, value로 입력된 값 e.target.value 들어감 */}
+      {/* 사용자가 입력을 시작하면 바로 updateField 함수에 field로 'keyword' 키, value로 e.target.value(입력된 값) */}
       <input className='search-bar' placeholder='Search' value={keyword} onChange={(e) => updateField('keyword', e.target.value)} />
 
       {/* results 배열이 비어있지 않으면 -> Preview 항목 렌더링 */}
@@ -39,7 +41,7 @@ const SearchBar = ({ results, keyword, updateField }) => {
             console.log(name); // Andrew R. Kelly
             console.log({ name }); // {name: 'Andrew R. Kelly'}
 
-            return <SearchPreview key={index} index={index} name={name} position={position} updateText={updateText} />;
+            return <SearchPreview key={index} index={index} name={name} position={position} count={count} updateText={updateText} />;
           })}
         </div>
       ) : null}
@@ -48,12 +50,12 @@ const SearchBar = ({ results, keyword, updateField }) => {
 };
 
 // Preview 항목 보여주는 함수
-const SearchPreview = ({ updateText, index, name, position }) => {
+const SearchPreview = ({ updateText, index, name, position, count }) => {
   return (
     // preview 중 선택(클릭)한 항목에 대해 updateText 함수 실행
     <div
       onClick={() => {
-        updateText(`${index} / ${name} / ${position}`);
+        updateText(`${index} / ${name} / ${position} / ${count}`);
       }}
       className={`search-preview ${index === 0 ? 'start' : ''}`}
     >
