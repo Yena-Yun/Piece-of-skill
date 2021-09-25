@@ -39,7 +39,7 @@ const SearchBar = ({ results, keyword, updateField }) => {
             console.log(name); // Andrew R. Kelly
             console.log({ name }); // {name: 'Andrew R. Kelly'}
 
-            return <SearchPreview key={index} updateText={updateText} index={index} name={name} position={position} />;
+            return <SearchPreview key={index} index={index} name={name} position={position} updateText={updateText} />;
           })}
         </div>
       ) : null}
@@ -53,8 +53,7 @@ const SearchPreview = ({ updateText, index, name, position }) => {
     // preview 중 선택(클릭)한 항목에 대해 updateText 함수 실행
     <div
       onClick={() => {
-        updateText(name);
-        updateText(position);
+        updateText(`${index} / ${name} / ${position}`);
       }}
       className={`search-preview ${index === 0 ? 'start' : ''}`}
     >
