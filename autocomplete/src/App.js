@@ -1,7 +1,6 @@
-import SearchBar from './SearchBar';
-import './App.css';
-
 import React, { Component } from 'react';
+import './App.css';
+import SearchBar from './SearchBar';
 
 class App extends Component {
   state = {
@@ -19,7 +18,7 @@ class App extends Component {
     keyword: '',
     // results = 자동완성 preview 내용
     results: [],
-    // count = 항목을 클릭한 횟수(조회수)
+    // count = 각 항목을 클릭한 횟수(조회수)
     count: 0,
   };
 
@@ -49,12 +48,12 @@ class App extends Component {
   onSearch = (text) => {
     let data = this.state.data;
 
-    // (걸러낸 item을 담는 변수 이름이 state의 key 이름(results)과 똑같아야 함 - 변수를 resultArry 등으로 바꾸면 자동완성 항목이 나타나지 않음)
+    // (걸러낸 item을 담는 변수 이름이 state의 key 이름(results)과 똑같아야 함 - 변수를 resultArray 등으로 바꾸면 자동완성 항목이 나타나지 않음)
     var results = data.filter((item) => true === this.matchName(item.name, text) || true === this.matchPosition(item.position, text));
     // console.log('matchName으로 걸러진 item들 배열:' + results);
 
-    // { results }: matchName으로 걸러진 item 배열을 'results'라는 객체에 넣음 (콘솔에 {results: Array(2)}라고 찍힘 - 안에 요소가 2개 들어간 배열을 가진 results라는 이름의 객체)
-    console.log({ results }); // (한 마디로 '객체'화)
+    // { results }: matchName으로 걸러진 item 배열을 'results'라는 객체에 넣음 (콘솔에 {results: Array(2)} - 안에 요소가 2개 들어간 배열을 가진 results라는 이름의 객체)
+    console.log({ results });
 
     this.setState({ results });
   };

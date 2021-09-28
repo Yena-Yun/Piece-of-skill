@@ -2,7 +2,6 @@ import React from 'react';
 import './css/SearchBar.css';
 
 const SearchBar = ({ results, keyword, count, updateField }) => {
-  // results: onChange로 updateField 함수가 실행될 때마다 filter된 item들을 보여줄 배열 (= 자동완성 Preview 항목에 보여질 내용)
   console.log(results);
 
   // 삭제버튼 클릭 시
@@ -25,7 +24,7 @@ const SearchBar = ({ results, keyword, count, updateField }) => {
 
   return (
     <div className='auto'>
-      {/* x 버튼 클릭 - 인풋창 내용 삭제 */}
+      {/* 삭제 버튼 */}
       <button onClick={() => cancelSearch()} className={`cancel-btn ${keyword.length > 0 ? 'active' : 'inactive'}`}>
         x
       </button>
@@ -41,7 +40,17 @@ const SearchBar = ({ results, keyword, count, updateField }) => {
             console.log(name); // Andrew R. Kelly
             console.log({ name }); // {name: 'Andrew R. Kelly'}
 
-            return <SearchPreview key={index} index={index} name={name} position={position} count={count} updateText={updateText} />;
+            return (
+              <SearchPreview
+                key={index}
+                index={index}
+                name={name}
+                position={position}
+                keyword={keyword}
+                count={count}
+                updateText={updateText}
+              />
+            );
           })}
         </div>
       ) : null}
@@ -50,12 +59,12 @@ const SearchBar = ({ results, keyword, count, updateField }) => {
 };
 
 // Preview 항목 보여주는 함수
-const SearchPreview = ({ updateText, index, name, position, count }) => {
+const SearchPreview = ({ updateText, index, name, position, keyword, count }) => {
   return (
     // preview 중 선택(클릭)한 항목에 대해 updateText 함수 실행
     <div
       onClick={() => {
-        updateText(`${index} / ${name} / ${position} / ${count}`);
+        updateText(`${index} / ${name} / ${position} / ${keyword} / ${count}`);
       }}
       className={`search-preview ${index === 0 ? 'start' : ''}`}
     >
