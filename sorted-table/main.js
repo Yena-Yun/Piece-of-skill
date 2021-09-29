@@ -96,25 +96,34 @@ function replacement(parent) {
   var replace = {
     order: byLocale(),
     index: false,
+
     array: (function () {
       var array = [];
       for (var x = 0; x < children.length; x++) array[x] = children[x];
       return array;
     })(),
+
     checkIndex: function (index) {
       if (index) this.index = parseInt(index, 10);
       var tagName = parent.tagName.toLowerCase();
+      // 바로 윗 태그가 tbody이거나 index가 기존에 없으면 -> index = 0
       if (tagName == 'tbody' && !index) this.index = 0;
     },
+
     getText: function (child) {
+      // cells = 테이블의 셀
+      // index가 존재하면 받아온 child의 index번째 셀을 가져옴
       if (this.index) child = child.cells[this.index];
+      // index번째 셀(태그 덩어리)의 텍스트를 받아옴 (텍스트 뒤에 공백 추가하는 함수)
       return getTextByClone(child);
     },
+
     setChildren: function () {
       var array = this.array;
       while (parent.hasChildNodes()) parent.removeChild(parent.firstChild);
       for (var x = 0; x < array.length; x++) parent.appendChild(array[x]);
     },
+
     ascending: function (index) {
       // 오름차순
       this.checkIndex(index);
@@ -128,6 +137,7 @@ function replacement(parent) {
       this.array.sort(ascending);
       this.setChildren();
     },
+
     descending: function (index) {
       // 내림차순
       this.checkIndex(index);
@@ -145,25 +155,42 @@ function replacement(parent) {
   return replace;
 }
 
+// 태그를 복사해서 안에 있는 텍스트 얻어내고 뒤에 공백 추가
 function getTextByClone(tag) {
-  var clone = tag.cloneNode(true); // 태그의 복사본 만들기.
+  // tag = index를 부여받은 셀 태그
+  var clone = tag.cloneNode(true); // 복사본 만들기 ([...tag]와 비슷한 개념인듯)
+  // 복사본에서 <br/> 태그 가져오기
   var br = clone.getElementsByTagName('br');
+  // br 태그의 맨 앞자리가 있는 동안(?)
   while (br[0]) {
+    // 공백이 들어간 텍스트노드 생성
     var blank = document.createTextNode(' ');
+    // 공백 앞에 br태그 0번째 넣고
     clone.insertBefore(blank, br[0]);
+    // br태그 0번째 제거 -> 공백을 넣기 위한 기준 역할만?
     clone.removeChild(br[0]);
   }
+
   var isBlock = function (tag) {
     var display = '';
+    // getComputedStyle: 특정 태그의 css 속성들을 모두 가져옴
+    // 원래 javascript에서는 getPropertyValue로 속성들 중 하나를 가져오는 것 같지만(getPropertyValue('font-size')) jquery는 [ ]로 간단히 가져올 수 있는 듯
     if (window.getComputedStyle) display = window.getComputedStyle(tag, '')['display'];
     else display = tag.currentStyle['display'];
     return display == 'block' ? true : false;
   };
+
+  // getElementsByTagName('*'): 여러 태그 덩어리(clone)의 태그 전부를 가져옴 => 배열이 됨
   var children = clone.getElementsByTagName('*');
+  // 배열을 돌면서 child라는 변수에 각각 따로 담음
   for (var x = 0; x < children.length; x++) {
     var child = children[x];
+    // child에 value가 없거나(?) display: block이 있는 경우
+    // innerHTML 뒤에 공백 추가 (개봉일 부분인듯)
     if (!('value' in child) && isBlock(child)) child.innerHTML = child.innerHTML + ' ';
   }
+
+  // textContent가 clone 태그 덩어리에 있으면 textContent 아니면 innerText 반환
   var textContent = 'textContent' in clone ? clone.textContent : clone.innerText;
   return textContent;
 }
