@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import useScroll from './useScroll';
 import Item from './Item';
 
@@ -19,16 +20,20 @@ const VirtualScroll = (props) => {
     .map((_, idx) => <Item key={idx + startIndex} index={idx + startIndex} height={itemHeight} />);
 
   return (
-    <div
-      ref={ref}
-      id='viewport_container'
-      style={{ border: '1px solid black', width: '200px', margin: 'auto', height: containerHeight, overflowY: 'auto' }}
-    >
-      <div id='virtual_container' style={{ height: totalHeight, position: 'relative' }}>
-        <div style={{ transform: `translateY(${offsetY}px)` }}>{renderVisibleChildren}</div>
+    <Wrapper>
+      <div
+        ref={ref}
+        id='viewport_container'
+        style={{ border: '1px solid black', width: '200px', margin: 'auto', height: containerHeight, overflowY: 'auto' }}
+      >
+        <div id='virtual_container' style={{ height: totalHeight, position: 'relative' }}>
+          <div style={{ transform: `translateY(${offsetY}px)` }}>{renderVisibleChildren}</div>
+        </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div``;
 
 export default VirtualScroll;
