@@ -32,7 +32,7 @@ class Ball {
       this.vely *= -1;
     }
 
-    // 좌표 값에 속도를 더함: 공이 움직임
+    // 좌표 값에 속도를 더해서 공이 움직이게 함
     this.x += this.velx;
     this.y += this.vely;
   }
@@ -49,15 +49,16 @@ let ballCnt = 1; // 거듭제곱으로 생성되는 공의 개수
 // 생성된 공을 담을 배열
 const balls = [];
 
-// 공의 x, y 초기값
+// 공의 x, y 좌표 초기값
 let x = 10;
 let y = 10;
-
+// 반지름
 let radius = 5;
 
 function createBall() {
   while (balls.length < ballCnt) {
-    // ballCnt가 거듭제곱된 상태이면 공의 생성지점인 x, y 좌표에 랜덤값 부여
+    // ballCnt가 거듭제곱된 상태이면
+    // 공의 생성지점인 x, y 좌표에 랜덤값 부여
     if (ballCnt !== 1) {
       x = random(radius, width - radius);
       y = random(radius, height - radius);
@@ -83,7 +84,7 @@ function animate() {
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, width, height);
 
-  // balls 배열을 돌며 각 공 인스턴스에 draw와 bounce 함수 실행
+  // balls 배열을 돌면서 각각의 공에 draw와 bounce 함수 실행
   for (let i = 0; i < balls.length; i++) {
     balls[i].draw();
     balls[i].bounce();
@@ -116,7 +117,7 @@ const pauseBtn = document.getElementById('pause');
 pauseBtn.addEventListener('click', () => {
   isPaused = !isPaused;
 
-  // 누를 때마다 버튼 텍스트 바꾸기
+  // 누를 때마다 버튼 text 바꾸기
   if (isPaused) {
     pauseBtn.innerText = '다시재생';
   } else {
@@ -136,17 +137,17 @@ copyBtn.addEventListener('click', () => {
   ballCnt = Math.pow(4, powerCnt); // 총 생성될 공의 개수
   console.log(ballCnt);
 
-  // ballCnt 갯수만큼 공 생성
+  // ballCnt 개수만큼 공 생성
   createBall();
 });
 
 // 멈춤 버튼
 const stopBtn = document.getElementById('stop');
 stopBtn.addEventListener('click', () => {
-  // 화면에 움직임이 있을 때 '애니메이션' 삭제
+  // 화면에 움직임이 있을 때 캔버스 초기화
   cancelAnimationFrame(myReq);
 
-  // 화면에 움직임이 없을 때 정지된 '2d 그림' 삭제
+  // 화면에 움직임이 없을 때 캔버스 초기화
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   // 시작버튼 다시 활성화
