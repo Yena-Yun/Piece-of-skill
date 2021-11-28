@@ -51,18 +51,7 @@ class Ball {
   }
 }
 
-// 4배수로 숫자 늘리기 (count: 4를 제곱할 횟수)
-function powerOfFour(count) {
-  const num = Math.pow(4, count);
-  return num;
-}
-
-// 생성되는 공에 랜덤한 색깔 부여
-function random(min, max) {
-  const num = Math.floor(Math.random() * (max - min + 1)) + min;
-  return num;
-}
-
+// 일시정지 및 멈춤 flag
 let isPaused = false;
 let isStopped = false;
 
@@ -70,6 +59,8 @@ let isStopped = false;
 const startBtn = document.getElementById('start');
 startBtn.addEventListener('click', () => {
   console.log('시작버튼 클릭!');
+  createBall();
+
   startBtn.style.color = '#c5c5c5';
   startBtn.style.cursor = 'default';
   startBtn.style.backgroundColor = '#eee';
@@ -104,27 +95,57 @@ stopBtn.addEventListener('click', () => {
   isStopped = true;
   if (isStopped || isPaused) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    // 시작버튼 되돌리기
+    startBtn.style.color = '#000';
+    startBtn.style.cursor = 'pointer';
+    startBtn.style.backgroundColor = '#eee';
+    startBtn.style.pointerEvents = 'auto';
   }
 });
 
-//   create some balls and store in an array
+// 생성되는 공에 랜덤한 색깔 부여
+function random(min, max) {
+  const num = Math.floor(Math.random() * (max - min + 1)) + min;
+  return num;
+}
+
+let count = 0; // 4를 거듭제곱할 횟수
+let powerOfFour = 1; // 최종 생성될 공의 개수
+
+// 복제 버튼
+const copyBtn = document.getElementById('copy');
+copyBtn.addEventListener('click', () => {
+  console.log('복제버튼 클릭!');
+  count++; // 복제버튼을 누를 때마다 count가 1씩 증가
+  console.log(count);
+  powerOfFour = Math.pow(4, count); // 4의 count 제곱만큼 증가한 값으로 업데이트
+  console.log(powerOfFour);
+
+  createBall();
+});
+
+// create some balls and store in an array
 const balls = [];
-let count = 4;
 
-while (balls.length < count) {
-  let radius = 5; // 반지름 지정
+function createBall() {
+  // balls 배열을 거듭제곱수만큼 돌면서 공 인스턴스 생성
+  while (balls.length < powerOfFour) {
+    let radius = 5; // 반지름 지정
 
-  // ball 생성하기
-  const ball = new Ball(
-    random(radius, width - radius), // x 좌표 (공이 생성될 시작 지점)
-    random(radius, height - radius), // y 좌표 (공이 생성될 시작 지점)
-    5, // 속도
-    radius, // 반지름
-    `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})` // 색깔
-  );
+    // ball 생성하기
+    const ball = new Ball(
+      random(radius, width - radius), // x 좌표 (공이 생성될 시작 지점)
+      random(radius, height - radius), // y 좌표 (공이 생성될 시작 지점)
+      5, // 속도
+      radius, // 반지름
+      `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})` // 색깔
+    );
 
-  // balls 배열에 생성된 ball 인스턴스 추가
-  balls.push(ball);
+    console.log(ball);
+
+    // balls 배열에 생성된 ball 인스턴스 추가
+    balls.push(ball);
+  }
 }
 
 // create animate func
