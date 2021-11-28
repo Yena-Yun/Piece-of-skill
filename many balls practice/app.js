@@ -38,6 +38,7 @@ class Ball {
   }
 }
 
+// 랜덤 함수
 function random(min, max) {
   const num = Math.floor(Math.random() * (max - min + 1)) + min;
   return num;
@@ -49,10 +50,9 @@ let ballCnt = 1; // 거듭제곱으로 생성되는 공의 개수
 // 생성된 공을 담을 배열
 const balls = [];
 
-// 공의 x, y 좌표 초기값
+// 공의 x, y 좌표 초기값과 반지름
 let x = 10;
 let y = 10;
-// 반지름
 let radius = 5;
 
 function createBall() {
@@ -69,9 +69,10 @@ function createBall() {
       y, // 공이 생성될 y 좌표
       5, // 속도
       radius, // 반지름
-      `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})` // 랜덤 색깔
+      `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})` // 공에 랜덤 색깔 부여
     );
 
+    // 복제된 직후 공이 화면에 나타나지는 않지만 콘솔창으로 생성된 공들을 확인할 수 있음
     console.log(ball);
 
     // 배열에 생성된 공 추가
@@ -90,6 +91,7 @@ function animate() {
     balls[i].bounce();
   }
 
+  // isPaused가 false일 때만 애니메이션 실행
   if (!isPaused) {
     myReq = requestAnimationFrame(animate);
   }
@@ -144,10 +146,10 @@ copyBtn.addEventListener('click', () => {
 // 멈춤 버튼
 const stopBtn = document.getElementById('stop');
 stopBtn.addEventListener('click', () => {
-  // 화면에 움직임이 있을 때 캔버스 초기화
+  // 화면에 움직임이 있을 때 캔버스 초기화 (애니메이션 삭제)
   cancelAnimationFrame(myReq);
 
-  // 화면에 움직임이 없을 때 캔버스 초기화
+  // 화면에 움직임이 없을 때 캔버스 초기화 (정지된 공 삭제)
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   // 시작버튼 다시 활성화
