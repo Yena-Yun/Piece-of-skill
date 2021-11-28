@@ -8,6 +8,8 @@ const height = canvas.height;
 // call the getContext method to draw 2d shape
 const ctx = canvas.getContext('2d');
 
+let myReq;
+
 // create Ball class
 class Ball {
   constructor(x, y, speed, radius, color) {
@@ -70,7 +72,7 @@ startBtn.addEventListener('click', () => {
   // console.log(ball.x);
   // console.log(ball.y);
 
-  window.requestAnimationFrame(animate);
+  myReq = requestAnimationFrame(animate);
 });
 
 // 일시정지 버튼
@@ -86,7 +88,7 @@ pauseBtn.addEventListener('click', () => {
   }
 
   if (!isPaused) {
-    window.requestAnimationFrame(animate);
+    myReq = requestAnimationFrame(animate);
   }
 });
 
@@ -97,6 +99,8 @@ stopBtn.addEventListener('click', () => {
   // isStopped = true;
   console.log('멈춤버튼 isStopped:' + isStopped);
   // if (isStopped) {
+  cancelAnimationFrame(myReq);
+
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   // // 시작버튼 되돌리기
   // startBtn.style.color = '#000';
@@ -164,7 +168,7 @@ function animate() {
   }
 
   if (!isPaused) {
-    requestAnimationFrame(animate);
+    myReq = requestAnimationFrame(animate);
   }
 }
 
