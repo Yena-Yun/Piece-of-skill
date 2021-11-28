@@ -63,6 +63,50 @@ function random(min, max) {
   return num;
 }
 
+let isPaused = false;
+let isStopped = false;
+
+// 시작 버튼
+const startBtn = document.getElementById('start');
+startBtn.addEventListener('click', () => {
+  console.log('시작버튼 클릭!');
+  startBtn.style.color = '#c5c5c5';
+  startBtn.style.cursor = 'default';
+  startBtn.style.backgroundColor = '#eee';
+  startBtn.style.pointerEvents = 'none';
+  // console.log(ball.x);
+  // console.log(ball.y);
+
+  window.requestAnimationFrame(animate);
+});
+
+// 일시정지 버튼
+const pauseBtn = document.getElementById('pause');
+pauseBtn.addEventListener('click', () => {
+  console.log('일시정지버튼 클릭!');
+  isPaused = !isPaused;
+
+  if (isPaused) {
+    pauseBtn.innerText = '다시재생';
+  } else {
+    pauseBtn.innerText = '일시정지';
+  }
+
+  if (!isPaused) {
+    window.requestAnimationFrame(animate);
+  }
+});
+
+// 멈춤 버튼
+const stopBtn = document.getElementById('stop');
+stopBtn.addEventListener('click', () => {
+  console.log('멈춤버튼 클릭!');
+  isStopped = true;
+  if (isStopped || isPaused) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  }
+});
+
 //   create some balls and store in an array
 const balls = [];
 let count = 4;
@@ -83,8 +127,8 @@ while (balls.length < count) {
   balls.push(ball);
 }
 
-// create loop func
-function loop() {
+// create animate func
+function animate() {
   // cover the previous frame's drawing before the next one is drawn
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, width, height);
@@ -95,8 +139,10 @@ function loop() {
     balls[i].bounce();
   }
 
-  requestAnimationFrame(loop);
+  if (!isPaused) {
+    requestAnimationFrame(animate);
+  }
 }
 
-// finally call the loop func once start
-loop();
+// finally call the animate func once start
+// animate();
