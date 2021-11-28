@@ -68,7 +68,7 @@ const balls = [];
 let count = 4;
 
 while (balls.length < count) {
-  let radius = 10; // 반지름 지정
+  let radius = 5; // 반지름 지정
 
   // ball 생성하기
   const ball = new Ball(
@@ -86,7 +86,7 @@ while (balls.length < count) {
 // create loop func
 function loop() {
   // cover the previous frame's drawing before the next one is drawn
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+  ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, width, height);
 
   // run necessary func
@@ -95,7 +95,6 @@ function loop() {
     balls[i].bounce();
   }
 
-  // lets calls loop func itself over and over again (=> make animation smooth)
   requestAnimationFrame(loop);
 }
 
