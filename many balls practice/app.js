@@ -60,6 +60,8 @@ const startBtn = document.getElementById('start');
 startBtn.addEventListener('click', () => {
   console.log('시작버튼 클릭!');
   createBall();
+  isStopped = !isStopped;
+  console.log('시작버튼 isStopped:' + isStopped);
 
   startBtn.style.color = '#c5c5c5';
   startBtn.style.cursor = 'default';
@@ -92,15 +94,16 @@ pauseBtn.addEventListener('click', () => {
 const stopBtn = document.getElementById('stop');
 stopBtn.addEventListener('click', () => {
   console.log('멈춤버튼 클릭!');
-  isStopped = true;
-  if (isStopped || isPaused) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    // 시작버튼 되돌리기
-    startBtn.style.color = '#000';
-    startBtn.style.cursor = 'pointer';
-    startBtn.style.backgroundColor = '#eee';
-    startBtn.style.pointerEvents = 'auto';
-  }
+  // isStopped = true;
+  console.log('멈춤버튼 isStopped:' + isStopped);
+  // if (isStopped) {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  // // 시작버튼 되돌리기
+  // startBtn.style.color = '#000';
+  // startBtn.style.cursor = 'pointer';
+  // startBtn.style.backgroundColor = '#eee';
+  // startBtn.style.pointerEvents = 'auto';
+  // }
 });
 
 // 생성되는 공에 랜덤한 색깔 부여
