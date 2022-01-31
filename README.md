@@ -32,4 +32,6 @@
 8. devto 사이트 검색어 자동완성
 * 사이트 Header 구현 (반응형 + 라우터 연결)
 * 사이트 SearchPage 구현
-<img src="https://user-images.githubusercontent.com/68722179/151751724-f9f0324e-701a-4cbe-b71c-1ff257eb6767.png" width="500" />
+* Header와 검색페이지를 함께 보여주는 이미지
+<img src="https://user-images.githubusercontent.com/68722179/151751874-c7a9d714-64f0-4a64-8efd-d04c6e52cdca.png" width="600" />
+
