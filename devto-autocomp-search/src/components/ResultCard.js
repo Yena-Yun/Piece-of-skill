@@ -1,38 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import DevtoUser from '../assets/img/devto-user.jpg';
 
-const Card = () => {
+const ResultCard = ({ data }) => {
+  const { id, userImage, userName, date, title, hashTags, reactions, comments, length } = data;
+
   return (
-    <Wrapper>
+    <Wrapper key={id}>
       <PostHeader>
         <UserProfile>
-          <UserImage src={DevtoUser} alt='user-profile' />
+          <UserImage src={userImage} alt='user-profile' />
         </UserProfile>
         <UserInfo>
-          <Username>Michael Sakhniuk</Username>
+          <Username>{userName}</Username>
           <DateLink>
-            <time>Jan 5 '21</time>
+            <time>{date}</time>
           </DateLink>
         </UserInfo>
       </PostHeader>
       <PostSection>
         <Title>
-          <TitleLink>300+ React Interview Questions</TitleLink>
+          <TitleLink>{title}</TitleLink>
         </Title>
         <HashTagList>
-          <HashTagItem href='/'>#react</HashTagItem>
-          <HashTagItem href='/'>#webdev</HashTagItem>
-          <HashTagItem href='/'>#javascript</HashTagItem>
-          <HashTagItem href='/'>#beginners</HashTagItem>
+          {hashTags.map((hashTag, idx) => (
+            <HashTagItem key={idx} href='/'>
+              #{hashTag}
+            </HashTagItem>
+          ))}
         </HashTagList>
         <PostFooter>
           <Details>
-            <Reactions>2220 reactions</Reactions>
-            <AddComments>32 comments</AddComments>
+            <Reactions>{reactions} reactions</Reactions>
+            <Comments>{comments} comments</Comments>
           </Details>
           <Save>
-            <ReadLength>128 min read</ReadLength>
+            <Length>{length} min read</Length>
             <SaveBtn>
               <span>Save</span>
             </SaveBtn>
@@ -49,6 +51,7 @@ const Wrapper = styled.div`
   background: #fff;
   border-radius: 7px;
   box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.1);
+  margin-bottom: 16px;
 
   @media screen and (max-width: 1024px) {
     width: auto;
@@ -131,7 +134,7 @@ const Reactions = styled.span`
   padding: 4px 12px 4px 8px;
 `;
 
-const AddComments = styled.span`
+const Comments = styled.span`
   color: #3d3d3d;
   padding: 4px 12px 4px 8px;
 `;
@@ -140,7 +143,7 @@ const Save = styled.div`
   display: flex;
 `;
 
-const ReadLength = styled.div`
+const Length = styled.div`
   margin-right: 8px;
   font-size: 12px;
   color: #525252;
@@ -159,4 +162,4 @@ const SaveBtn = styled.div`
   }
 `;
 
-export default Card;
+export default ResultCard;

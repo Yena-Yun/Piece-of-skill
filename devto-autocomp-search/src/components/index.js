@@ -1,5 +1,5 @@
 import Header from './Header';
 import SearchInput from './SearchInput';
-import Card from './Card';
+import ResultCard from './ResultCard';
 
-export { Header, SearchInput, Card };
+export { Header, SearchInput, ResultCard };

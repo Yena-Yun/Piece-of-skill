@@ -44,6 +44,10 @@ const InnerBox = styled.div`
 const LeftNavbar = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const IntroBox = styled.div`
@@ -54,11 +58,6 @@ const IntroBox = styled.div`
   background: #fafafa;
   color: #404040;
   box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
-
-  @media screen and (max-width: 1024px) {
-    width: auto;
-    height: 263px;
-  }
 `;
 
 const IntroTitle = styled.h2`

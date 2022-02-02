@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Header, SearchInput, Card } from '../components';
+import axios from 'axios';
+import { Header, SearchInput, ResultCard } from '../components';
 
 const SearchPage = () => {
+  const [resData, setResData] = useState(null);
+
+  useEffect(() => {
+    axios('http://localhost:8000/data').then((res) => {
+      // console.log(res.data);
+      setResData(res.data);
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -46,9 +56,7 @@ const SearchPage = () => {
                 </SideNavItem>
               </SideNavList>
             </SideNav>
-            <Results>
-              <Card />
-            </Results>
+            <Results>{resData && resData.map((el, idx) => <ResultCard key={idx} data={el} />)}</Results>
           </Section>
         </InnerBox>
       </Wrapper>
