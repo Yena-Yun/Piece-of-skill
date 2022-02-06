@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { Header } from '../components';
 
 const MainPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [val, setVal] = useState('');
+
+  const searchTerm = searchParams.get('name') || '';
+
+  const handleChange = (e) => {
+    setVal(e.target.value);
+
+    handleSearch();
+  };
+
+  const handleSearch = (e) => {
+    const name = e.target.value;
+
+    if (name) {
+      setSearchParams({ name });
+    } else {
+      setSearchParams({});
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleKeyPress = (target, value) => {
+    if (target.charCode === 13) {
+      navigate(`/search?q=${value}`);
+      handleSearch();
+    }
+  };
+
   return (
     <>
-      <Header />
+      <Header value={searchTerm} setVal={setVal} handleChange={handleSearch} handleKeyPress={handleKeyPress} />
       <Wrapper>
         <InnerBox>
           <LeftNavbar>

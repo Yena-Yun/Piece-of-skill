@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SearchInput } from '../components';
 import { Logo, Hamburger, SearchLinkBtn } from '../assets';
 
-const Header = () => {
+const Header = ({ value, handleChange, handleKeyPress, setVal }) => {
   return (
     <Wrapper>
       <InnerWrap>
@@ -17,7 +17,7 @@ const Header = () => {
               <LogoImg src={Logo} alt='site-logo' />
             </LogoLink>
           </LogoBox>
-          <SearchInput header />
+          <SearchInput header value={value} handleChange={handleChange} handleKeyPress={handleKeyPress} />
         </LogoSearchBox>
         <EntryBox>
           <SearchLink to='/search'>

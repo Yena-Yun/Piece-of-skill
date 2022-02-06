@@ -3,16 +3,18 @@ import styled, { css } from 'styled-components';
 import { SearchInputBtn } from '../assets';
 
 const SearchInput = (props) => {
-  const { header, search } = props;
+  const { header, search, location, value, searchTerm, handleChange, handleKeyPress } = props;
 
   const styles = {
     header,
     search,
   };
 
+  // console.log(location);
+
   return (
     <SearchBox {...styles}>
-      <ElSearchInput placeholder='Search...' />
+      <ElSearchInput placeholder='Search...' value={value} onChange={handleChange} onKeyPress={(e) => handleKeyPress(e, value)} />
       <SearchBtn>
         <SearchInputBtn />
       </SearchBtn>

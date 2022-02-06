@@ -1,25 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Header, SearchInput, ResultCard } from '../components';
+import { Header, SearchInput } from '../components';
+import { useSearchParams } from 'react-router-dom';
 
-const SearchPage = () => {
-  const [resData, setResData] = useState(null);
+const posts = ['Jenny', 'Rose', 'Jisu', 'Lisa'];
 
-  useEffect(() => {
-    axios('http://localhost:8000/data').then((res) => {
-      // console.log(res.data);
-      setResData(res.data);
-    });
-  }, []);
+const SearchPage = ({ setVal }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchTerm = searchParams.get('name') || '';
+
+  const handleChange = (e) => {
+    setVal(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    const name = e.target.value;
+
+    if (name) {
+      setSearchParams({ name });
+    } else {
+      setSearchParams({});
+    }
+  };
 
   return (
     <>
-      <Header />
+      <Header value={searchTerm} handleChange={handleSearch} />
       <Wrapper>
         <InnerBox>
           <SearchHeader>
-            <SearchInput search />
+            <div>
+              <SearchInput value={searchTerm} handleChange={handleSearch} />
+              <button>Search</button>
+            </div>
             <Title>Search results</Title>
             <NavList>
               <NavItem>
@@ -56,7 +71,22 @@ const SearchPage = () => {
                 </SideNavItem>
               </SideNavList>
             </SideNav>
-            <Results>{resData && resData.map((el, idx) => <ResultCard key={idx} data={el} />)}</Results>
+            <Results>
+              냠냠
+              <ul>
+                {posts
+                  .filter((post) => post.toLowerCase().includes(searchTerm.toLowerCase()))
+                  .map((post, idx) => (
+                    <li key={idx}>{post}</li>
+                  ))}
+              </ul>
+              {/* {data} */}
+              {/* {filteredData
+                .map((data, idx) => (
+                  <ResultCard key={idx} data={data} />
+                ))} */}
+              {/* {data.map((el, idx) => <ResultCard key={idx} data={el} />)} */}
+            </Results>
           </Section>
         </InnerBox>
       </Wrapper>
