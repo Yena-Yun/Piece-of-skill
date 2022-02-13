@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { getApi } from '../utils/getApi';
-import { Header } from '../components';
+import { getApi } from 'utils/getApi';
+import { Header } from 'components';
+import LoginSignupBtn from 'utils/constants/LoginSignupBtn';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const MainPage = () => {
 
   const handleChange = (e) => {
     setKeyword(e.target.value);
-
     handleSearch();
   };
 
@@ -43,7 +43,6 @@ const MainPage = () => {
 
     target = target.toLowerCase();
     keyword = keyword.toString().toLowerCase();
-
     return target.includes(keyword); // true or false
   };
 
@@ -69,8 +68,7 @@ const MainPage = () => {
               </IntroTitle>
               <IntroDesc>We're a place where coders share, stay up-to-date and grow their careers.</IntroDesc>
               <EntryBtnGrop>
-                <SignUpBtn>Create account</SignUpBtn>
-                <LogInBtn>Log in</LogInBtn>
+                <LoginSignupBtn main />
               </EntryBtnGrop>
             </IntroBox>
           </LeftNavbar>
@@ -139,43 +137,6 @@ const IntroDesc = styled.p`
 const EntryBtnGrop = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const SignUpBtn = styled.button`
-  height: 40px;
-  color: #3b49df;
-  border: 1px solid #3b49df;
-  padding: 7px 15px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  border-radius: 6px;
-  margin-bottom: 4px;
-
-  &:hover {
-    background: #3b49df;
-    color: #fff;
-  }
-`;
-
-const LogInBtn = styled.button`
-  height: 40px;
-  border: none;
-  padding: 8px 16px;
-  font-size: 16px;
-  line-height: 24px;
-  border-radius: 6px;
-  color: #404040;
-
-  &:hover {
-    color: #2f3ab2;
-    background: #ebecfc;
-    text-decoration: underline solid #2f3ab2;
-  }
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const MainSection = styled.div``;

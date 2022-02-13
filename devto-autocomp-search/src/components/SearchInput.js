@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { SearchBtnIcon } from '../assets';
+import { SearchBtnIcon } from 'assets';
 
 const SearchInput = ({ header, search, keyword, handleChange, handleKeyPress }) => {
   const styles = {

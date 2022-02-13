@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { MainPage, SearchPage } from './pages';
+import { MainPage, SearchPage } from 'pages';
 
 function App() {
   return (

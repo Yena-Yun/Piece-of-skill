@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { SearchInput } from '../components';
-import { Logo, Hamburger, SearchLinkBtn } from '../assets';
+import { Link, useNavigate } from 'react-router-dom';
+import { SearchInput } from 'components';
+import { Logo, Hamburger, SearchLinkBtn } from 'assets';
+import LoginSignupBtn from 'utils/constants/LoginSignupBtn';
 
 const Header = ({ keyword, results, handleChange, handleKeyPress }) => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <InnerWrap>
@@ -17,14 +19,13 @@ const Header = ({ keyword, results, handleChange, handleKeyPress }) => {
               <LogoImg src={Logo} alt='site-logo' />
             </LogoLink>
           </LogoBox>
-          <SearchInput header keyword={keyword} handleChange={handleChange} handleKeyPress={handleKeyPress} />
+          <SearchInput header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
         </LogoSearchBox>
         <EntryBox>
-          <SearchLink to='/search'>
+          <SearchBtn onClick={() => navigate('/search')}>
             <SearchLinkBtn />
-          </SearchLink>
-          <LogInBtn>Log in</LogInBtn>
-          <SignUpBtn>Create account</SignUpBtn>
+          </SearchBtn>
+          <LoginSignupBtn top />
         </EntryBox>
       </InnerWrap>
     </Wrapper>
@@ -102,12 +103,12 @@ const EntryBox = styled.div`
   }
 `;
 
-const SearchLink = styled(Link)`
+const SearchBtn = styled.button`
   display: none;
   margin: 0 4px;
   padding: 0 8px;
-  width: 27px;
-  height: 95%;
+  width: 40px;
+  height: 40px;
   border-radius: 7px;
 
   &:hover {

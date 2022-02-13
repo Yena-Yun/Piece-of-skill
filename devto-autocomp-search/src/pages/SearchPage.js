@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getApi } from '../utils/getApi';
-import { Header, ResultCard, SearchHeader, SideNav } from '../components';
+import { getApi } from 'utils/getApi';
+import { Header, ResultCard, SearchHeader, SideNav } from 'components';
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ const SearchPage = () => {
 
   const handleChange = (e) => {
     setKeyword(e.target.value);
-
     handleSearch();
   };
 
@@ -45,7 +44,6 @@ const SearchPage = () => {
 
     target = target.toLowerCase();
     if (keyword) keyword = keyword.toString().toLowerCase();
-
     return target.includes(keyword); // true or false
   };
 
@@ -110,6 +108,10 @@ const Section = styled.div`
 
 const Results = styled.div`
   padding: 40px 30px;
+
+  @media screen and (max-width: 768px) {
+    padding: 12px 0;
+  }
 
   @media screen and (max-width: 640px) {
     padding: 0;
