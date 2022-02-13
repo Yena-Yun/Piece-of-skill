@@ -1,39 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Header, SearchInput } from '../components';
-import { useSearchParams } from 'react-router-dom';
+import { Header, ResultCard, SearchInput } from '../components';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
-const posts = ['Jenny', 'Rose', 'Jisu', 'Lisa'];
-
-const SearchPage = ({ setVal }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const searchTerm = searchParams.get('name') || '';
-
-  const handleChange = (e) => {
-    setVal(e.target.value);
-  };
-
-  const handleSearch = (e) => {
-    const name = e.target.value;
-
-    if (name) {
-      setSearchParams({ name });
-    } else {
-      setSearchParams({});
-    }
-  };
-
+const SearchPage = () => {
+  const { state } = useLocation();
   return (
     <>
-      <Header value={searchTerm} handleChange={handleSearch} />
+      <Header />
       <Wrapper>
         <InnerBox>
           <SearchHeader>
             <div>
-              <SearchInput value={searchTerm} handleChange={handleSearch} />
-              <button>Search</button>
+              <SearchInput />
             </div>
             <Title>Search results</Title>
             <NavList>
@@ -72,20 +52,9 @@ const SearchPage = ({ setVal }) => {
               </SideNavList>
             </SideNav>
             <Results>
-              냠냠
-              <ul>
-                {posts
-                  .filter((post) => post.toLowerCase().includes(searchTerm.toLowerCase()))
-                  .map((post, idx) => (
-                    <li key={idx}>{post}</li>
-                  ))}
-              </ul>
-              {/* {data} */}
-              {/* {filteredData
-                .map((data, idx) => (
-                  <ResultCard key={idx} data={data} />
-                ))} */}
-              {/* {data.map((el, idx) => <ResultCard key={idx} data={el} />)} */}
+              {state.results.map((result, idx) => (
+                <ResultCard key={idx} result={result} />
+              ))}
             </Results>
           </Section>
         </InnerBox>
@@ -163,6 +132,8 @@ const SideNavItem = styled.li`
   border-radius: 7px;
 `;
 
-const Results = styled.div``;
+const Results = styled.div`
+  padding: 40px 30px;
+`;
 
 export default SearchPage;

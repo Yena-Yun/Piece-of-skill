@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { SearchInput } from '../components';
 import { Logo, Hamburger, SearchLinkBtn } from '../assets';
 
-const Header = ({ value, handleChange, handleKeyPress, setVal }) => {
+const Header = ({ keyword, results, handleChange, handleKeyPress }) => {
   return (
     <Wrapper>
       <InnerWrap>
@@ -17,7 +17,7 @@ const Header = ({ value, handleChange, handleKeyPress, setVal }) => {
               <LogoImg src={Logo} alt='site-logo' />
             </LogoLink>
           </LogoBox>
-          <SearchInput header value={value} handleChange={handleChange} handleKeyPress={handleKeyPress} />
+          <SearchInput header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
         </LogoSearchBox>
         <EntryBox>
           <SearchLink to='/search'>
@@ -38,6 +38,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 5;
   display: flex;
   justify-content: center;
   align-items: center;

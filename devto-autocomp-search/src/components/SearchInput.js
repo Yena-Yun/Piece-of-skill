@@ -1,22 +1,18 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { SearchInputBtn } from '../assets';
+import { SearchBtnIcon } from '../assets';
 
-const SearchInput = (props) => {
-  const { header, search, location, value, searchTerm, handleChange, handleKeyPress } = props;
-
+const SearchInput = ({ header, search, keyword, results, handleChange, handleKeyPress }) => {
   const styles = {
     header,
     search,
   };
 
-  // console.log(location);
-
   return (
     <SearchBox {...styles}>
-      <ElSearchInput placeholder='Search...' value={value} onChange={handleChange} onKeyPress={(e) => handleKeyPress(e, value)} />
-      <SearchBtn>
-        <SearchInputBtn />
+      <ElSearchInput placeholder='Search...' value={keyword} onChange={handleChange} onKeyPress={handleKeyPress} />
+      <SearchBtn onKeyPress={handleKeyPress}>
+        <SearchBtnIcon />
       </SearchBtn>
     </SearchBox>
   );

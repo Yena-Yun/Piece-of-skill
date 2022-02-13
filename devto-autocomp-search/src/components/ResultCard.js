@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ResultCard = ({ data }) => {
-  const { id, userImage, userName, date, title, hashTags, reactions, comments, length } = data;
+const ResultCard = ({ result }) => {
+  const { id, userImage, userName, date, title, hashTags, reactions, comments, length } = result;
 
   return (
     <Wrapper key={id}>

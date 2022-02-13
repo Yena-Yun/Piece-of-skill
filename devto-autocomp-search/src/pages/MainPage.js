@@ -1,42 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { getApi } from '../utils/getApi';
 import { Header } from '../components';
 
 const MainPage = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [val, setVal] = useState('');
+  const [data, setData] = useState([]);
+  const [keyword, setKeyword] = useState('');
+  const [results, setResults] = useState([]);
+  const [result, setResult] = useState();
 
-  const searchTerm = searchParams.get('name') || '';
+  useEffect(() => {
+    let completed = false;
+
+    (async function getData() {
+      const response = await getApi();
+      console.log(response);
+      if (!completed) {
+        setData(response);
+      }
+    })();
+    return () => {
+      completed = true;
+    };
+  }, []);
+
+  console.log(results);
+
+  const searchKeyword = searchParams.get('keyword') || '';
 
   const handleChange = (e) => {
-    setVal(e.target.value);
+    setKeyword(e.target.value);
 
-    handleSearch();
-  };
-
-  const handleSearch = (e) => {
-    const name = e.target.value;
-
-    if (name) {
-      setSearchParams({ name });
-    } else {
-      setSearchParams({});
+    if (data) {
+      let filteredRes = data.filter((result) => matchInput(result.title, keyword) === true);
+      console.log(filteredRes);
+      setResults(filteredRes);
     }
   };
 
-  const navigate = useNavigate();
+  // const onSearch = (input) => {
 
-  const handleKeyPress = (target, value) => {
-    if (target.charCode === 13) {
-      navigate(`/search?q=${value}`);
-      handleSearch();
-    }
+  // };
+
+  const matchInput = (target, keyword) => {
+    if (keyword === '') return false;
+
+    target = target.toLowerCase();
+    keyword = keyword.toString().toLowerCase();
+
+    return target.includes(keyword); // true or false
   };
 
+  const handelSubmit = (e) => {
+    console.log(results);
+    navigate(`/search?q=${keyword}`, { state: { results }, replace: false });
+  };
+
+  const handleKeyPress = (e) => {
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      handelSubmit();
+    }
+  };
   return (
     <>
-      <Header value={searchTerm} setVal={setVal} handleChange={handleSearch} handleKeyPress={handleKeyPress} />
+      <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
       <Wrapper>
         <InnerBox>
           <LeftNavbar>
