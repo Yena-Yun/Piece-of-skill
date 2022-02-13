@@ -1,56 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { Header, ResultCard, SearchInput } from '../components';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getApi } from '../utils/getApi';
+import { Header, ResultCard, SearchHeader, SideNav } from '../components';
 
 const SearchPage = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
+
+  const [data, setData] = useState([]);
+  const [keyword, setKeyword] = useState('');
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    let completed = false;
+
+    (async function getData() {
+      const response = await getApi();
+      if (!completed) {
+        setData(response);
+      }
+    })();
+
+    return () => {
+      completed = true;
+    };
+  }, []);
+
+  const handleChange = (e) => {
+    setKeyword(e.target.value);
+
+    handleSearch();
+  };
+
+  const handleSearch = () => {
+    if (data) {
+      let filteredRes = data.filter((result) => matchInput(result.title, keyword) === true);
+      setResults(filteredRes);
+    }
+  };
+
+  const matchInput = (target, keyword) => {
+    // if (keyword === '') return false;
+
+    target = target.toLowerCase();
+    if (keyword) keyword = keyword.toString().toLowerCase();
+
+    return target.includes(keyword); // true or false
+  };
+
+  const handelSubmit = () => {
+    navigate(`/search?q=${keyword}`, { state: { results }, replace: false });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handelSubmit();
+    }
+  };
+
   return (
     <>
       <Header />
       <Wrapper>
         <InnerBox>
-          <SearchHeader>
-            <div>
-              <SearchInput />
-            </div>
-            <Title>Search results</Title>
-            <NavList>
-              <NavItem>
-                <a href='/'>Most Relevant</a>
-              </NavItem>
-              <NavItem>
-                <a href='/'>Newest</a>
-              </NavItem>
-              <NavItem>
-                <a href='/'>Oldest</a>
-              </NavItem>
-            </NavList>
-          </SearchHeader>
+          <SearchHeader search keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
           <Section>
-            <SideNav>
-              <SideNavList>
-                <SideNavItem>
-                  <a href='/'>Posts</a>
-                </SideNavItem>
-                <SideNavItem>
-                  <a href='/'>Podcasts</a>
-                </SideNavItem>
-                <SideNavItem>
-                  <a href='/'>People</a>
-                </SideNavItem>
-                <SideNavItem>
-                  <a href='/'>Tags</a>
-                </SideNavItem>
-                <SideNavItem>
-                  <a href='/'>Comments</a>
-                </SideNavItem>
-                <SideNavItem>
-                  <a href='/'>My posts only</a>
-                </SideNavItem>
-              </SideNavList>
-            </SideNav>
+            <SideNav />
             <Results>
               {state.results.map((result, idx) => (
                 <ResultCard key={idx} result={result} />
@@ -67,73 +83,37 @@ const Wrapper = styled.div``;
 
 const InnerBox = styled.div`
   width: 100%;
-  max-width: 1280px;
+  max-width: 1024px;
   margin: 0 auto;
-  box-sizing: border-box;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-
-const SearchHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
 
   @media screen and (max-width: 640px) {
-    flex-direction: column;
+    gap: 0;
+    padding: 12px;
   }
-`;
-
-const Title = styled.h1`
-  font-size: 30px;
-
-  @media screen and (max-width: 640px) {
-    display: none;
-  }
-`;
-
-const NavList = styled.ul`
-  display: flex;
-`;
-
-const NavItem = styled.li`
-  padding: 8px 12px;
-  color: #575757;
 `;
 
 const Section = styled.div`
   display: flex;
-`;
-
-const SideNav = styled.div`
-  width: 240px;
-`;
-
-const SideNavList = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
 
   @media screen and (max-width: 768px) {
-    width: 100%;
     flex-direction: column;
   }
 
   @media screen and (max-width: 640px) {
-    width: auto;
-    flex-direction: row;
+    display: initial;
   }
-`;
-
-const SideNavItem = styled.li`
-  padding: 8px;
-  color: #090909;
-  border-radius: 7px;
 `;
 
 const Results = styled.div`
   padding: 40px 30px;
+
+  @media screen and (max-width: 640px) {
+    padding: 0;
+  }
 `;
 
 export default SearchPage;

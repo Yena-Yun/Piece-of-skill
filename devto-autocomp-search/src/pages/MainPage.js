@@ -1,49 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Routes, Route, Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getApi } from '../utils/getApi';
 import { Header } from '../components';
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [results, setResults] = useState([]);
-  const [result, setResult] = useState();
 
   useEffect(() => {
     let completed = false;
 
     (async function getData() {
       const response = await getApi();
-      console.log(response);
       if (!completed) {
         setData(response);
       }
     })();
+
     return () => {
       completed = true;
     };
   }, []);
 
-  console.log(results);
-
-  const searchKeyword = searchParams.get('keyword') || '';
-
   const handleChange = (e) => {
     setKeyword(e.target.value);
 
+    handleSearch();
+  };
+
+  const handleSearch = () => {
     if (data) {
       let filteredRes = data.filter((result) => matchInput(result.title, keyword) === true);
-      console.log(filteredRes);
       setResults(filteredRes);
     }
   };
-
-  // const onSearch = (input) => {
-
-  // };
 
   const matchInput = (target, keyword) => {
     if (keyword === '') return false;
@@ -54,17 +47,16 @@ const MainPage = () => {
     return target.includes(keyword); // true or false
   };
 
-  const handelSubmit = (e) => {
-    console.log(results);
+  const handelSubmit = () => {
     navigate(`/search?q=${keyword}`, { state: { results }, replace: false });
   };
 
   const handleKeyPress = (e) => {
-    console.log(e.key);
     if (e.key === 'Enter') {
       handelSubmit();
     }
   };
+
   return (
     <>
       <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />

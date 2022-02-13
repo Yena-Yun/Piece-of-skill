@@ -2,19 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { SearchBtnIcon } from '../assets';
 
-const SearchInput = ({ header, search, keyword, results, handleChange, handleKeyPress }) => {
+const SearchInput = ({ header, search, keyword, handleChange, handleKeyPress }) => {
   const styles = {
     header,
     search,
   };
 
   return (
-    <SearchBox {...styles}>
-      <ElSearchInput placeholder='Search...' value={keyword} onChange={handleChange} onKeyPress={handleKeyPress} />
-      <SearchBtn onKeyPress={handleKeyPress}>
-        <SearchBtnIcon />
-      </SearchBtn>
-    </SearchBox>
+    <Wrapper>
+      <SearchBox {...styles}>
+        <ElSearchInput placeholder='Search...' value={keyword} onChange={handleChange} onKeyPress={handleKeyPress} />
+        <SearchBtn onKeyPress={handleKeyPress}>
+          <SearchBtnIcon />
+        </SearchBtn>
+      </SearchBox>
+    </Wrapper>
   );
 };
 
@@ -22,6 +24,8 @@ SearchInput.defaultProps = {
   header: false,
   search: false,
 };
+
+const Wrapper = styled.div``;
 
 const SearchBox = styled.div`
   width: 420px;
@@ -39,8 +43,9 @@ const SearchBox = styled.div`
     ${(props) =>
       props.search &&
       css`
+        width: auto;
         display: block;
-        width: 200px;
+        margin: 0;
       `};
   }
 
@@ -54,6 +59,8 @@ const SearchBox = styled.div`
 
   @media screen and (max-width: 640px) {
     width: 100%;
+    margin: 0;
+    margin-bottom: 8px;
   }
 `;
 
