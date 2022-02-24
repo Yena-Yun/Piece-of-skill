@@ -1,7 +1,7 @@
 function sortingNumber(a, b) {
   if (typeof a == 'number' && typeof b == 'number') return a - b;
 
-  // 천단위 쉼표와 공백문자만 삭제하기.
+  // 천단위 쉼표와 공백문자만 삭제하기
   var a = (a + '').replace(/[,\s\xA0]+/g, '');
   var b = (b + '').replace(/[,\s\xA0]+/g, '');
 
@@ -13,10 +13,10 @@ function sortingNumber(a, b) {
   return parseFloat(a) - parseFloat(b);
 }
 
-/* changeForSorting() : 문자열 바꾸기. */
+/* changeForSorting() : 문자열 바꾸기 */
 
 function changeForSorting(first, second) {
-  // 문자열의 복사본 만들기.
+  // 문자열의 복사본 만들기
   var a = first.toString().replace(/[\s\xA0]+/g, ' ');
   var b = second.toString().replace(/[\s\xA0]+/g, ' ');
 
@@ -24,7 +24,7 @@ function changeForSorting(first, second) {
 
   if (a.search(/\d/) < 0 || b.search(/\d/) < 0 || a.length == 0 || b.length == 0) return change;
 
-  var regExp = /(\d),(\d)/g; // 천단위 쉼표를 찾기 위한 정규식.
+  var regExp = /(\d),(\d)/g; // 천단위 쉼표를 찾기 위한 정규식
 
   a = a.replace(regExp, '$1' + '$2');
   b = b.replace(regExp, '$1' + '$2');
