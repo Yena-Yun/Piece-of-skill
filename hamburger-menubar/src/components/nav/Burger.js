@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import RightNav from "./RightNav";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import RightNav from './RightNav';
 
-const Burger = (props) => {
+const Burger = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -40,24 +40,23 @@ const StyledBurger = styled.div`
   div {
     width: 32px;
     height: 4px;
-    /* open 상태에 따라 햄버거 색깔 바꾸기 */
-    background-color: ${({ open }) => (open ? "#ccc" : "#333")};
+    background-color: ${({ open }) => (open ? '#ccc' : '#333')};
     border-radius: 10px;
     transform-origin: 1px; // transform: rotate(45deg)에서 요소가 회전하는 '축'
     transition: all 0.2s linear;
 
     /* 메뉴바가 열려 있을 때 햄버거 아이콘을 X자로 만드는 애니메이션 */
     &:nth-child(1) {
-      transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
+      transform: ${({ open }) => (open ? 'rotate(45deg)' : 'rotate(0)')};
     }
 
     &:nth-child(2) {
-      transform: ${({ open }) => (open ? "translateX(15%)" : "translateX(0)")};
+      transform: ${({ open }) => (open ? 'translateX(15%)' : 'translateX(0)')};
       opacity: ${({ open }) => (open ? 0 : 1)};
     }
 
     &:nth-child(3) {
-      transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
+      transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
     }
   }
 `;

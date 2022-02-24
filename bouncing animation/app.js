@@ -16,7 +16,7 @@ class App {
     this.resize();
 
     // 공 스테이터스 기본값
-    this.ball = new Ball(this.stageWidth, this.stageHeight, 60, 15);
+    this.ball = new Ball(this.stageWidth, this.stageHeight, 40, 15);
 
     // 애니메이션 구동을 위해 requestAnimationFrame 설정
     window.requestAnimationFrame(this.animate.bind(this));

@@ -1,10 +1,9 @@
-import React from "react";
-import Navbar from "./components/nav/Navbar";
+import React from 'react';
+import Navbar from './components/nav/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      {/* Navbar = Header와 동일 */}
+    <div className='App'>
       <Navbar />
       App
     </div>
