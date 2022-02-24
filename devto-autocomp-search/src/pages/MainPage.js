@@ -4,8 +4,8 @@ import { getApi } from 'utils/getApi';
 import { Header } from 'components';
 
 const MainPage = () => {
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState('');
   const [results, setResults] = useState([]);
 
@@ -45,19 +45,20 @@ const MainPage = () => {
     return target.includes(keyword); // true or false
   };
 
-  const handelSubmit = () => {
+  const handleSubmit = () => {
+    if (!keyword) return false;
     navigate(`/search?q=${keyword}`, { state: { results }, replace: false });
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handelSubmit();
+      handleSubmit();
     }
   };
 
   return (
     <>
-      <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
+      <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} setKeyword={setKeyword} />
     </>
   );
 };

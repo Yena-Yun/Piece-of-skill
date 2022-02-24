@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { getApi } from 'utils/getApi';
 import { Header, ResultCard, SearchHeader, SideNav } from 'components';
 
 const SearchPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  // const [searchParams] = useSearchParams();
+  // console.log(searchParams.get('q')); // react
 
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [results, setResults] = useState([]);
+  // const [params, setParams] = useState(searchParams.get('q'));
 
   useEffect(() => {
     let completed = false;
@@ -40,35 +43,35 @@ const SearchPage = () => {
   };
 
   const matchInput = (target, keyword) => {
-    // if (keyword === '') return false;
-
     target = target.toLowerCase();
     if (keyword) keyword = keyword.toString().toLowerCase();
     return target.includes(keyword); // true or false
   };
 
-  const handelSubmit = () => {
+  const handleSubmit = () => {
+    if (!keyword) return false;
+
     navigate(`/search?q=${keyword}`, { state: { results }, replace: false });
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handelSubmit();
+      handleSubmit();
     }
   };
 
   return (
     <>
-      <Header />
+      <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} setKeyword={setKeyword} />
       <Wrapper>
         <InnerBox>
           <SearchHeader search keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
           <Section>
             <SideNav />
             <Results>
-              {state.results.map((result, idx) => (
-                <ResultCard key={idx} result={result} />
-              ))}
+              {state
+                ? state.results.map((result, idx) => <ResultCard key={idx} result={result} />)
+                : results.map((result, idx) => <ResultCard key={idx} result={result} />)}
             </Results>
           </Section>
         </InnerBox>
