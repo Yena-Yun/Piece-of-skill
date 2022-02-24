@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
-import SearchBar from './SearchBar';
+import SearchBar from './components/SearchBar';
 import dbData from './db.json';
 
 function App() {

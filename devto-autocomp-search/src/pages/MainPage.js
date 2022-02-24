@@ -27,7 +27,8 @@ const MainPage = () => {
   }, []);
 
   const handleChange = (e) => {
-    setKeyword(e.target.value);
+    setKeyword(e.target.value); // 동시에 실행 (비동기 x)
+    // setKeyword가 있기 전에 handleSearch가 실행됨
     handleSearch();
   };
 

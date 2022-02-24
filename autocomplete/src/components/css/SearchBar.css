@@ -1,13 +1,10 @@
-/*
-Input styles
-------------------
-*/
+/* Input styles */
 .search-bar {
 	width: 400px;
 	padding: 15px 10px;
 	font-size: 15px;
 	color: rgb(52, 52, 52);
-	border: none;
+	border: 1px solid #8e8e8e;
 	font-weight: 600;
 	border-radius: 0.2rem;
 }
@@ -16,10 +13,7 @@ Input styles
 	outline: none;
 }
 
-/*
-SearchBar container
-*/
-
+/* SearchBar container */
 .auto {
 	display: flex;
 	flex-direction: column;
@@ -29,8 +23,7 @@ SearchBar container
 	padding-top: 20px;
 }
 
-/*Cancel button styles*/
-
+/* Cancel button styles */
 .cancel-btn {
 	color: rgb(99, 99, 99);
 	background: transparent;
@@ -56,10 +49,7 @@ SearchBar container
 	opacity: 0;
 }
 
-/*
-search results container div
-*/
-
+/* search results container div */
 .search-results {
 	display: flex;
 	flex-direction: column;
@@ -73,10 +63,7 @@ search results container div
 	border-radius: 0.2rem;
 }
 
-/*
-SearchPreview Component
-*/
-
+/* SearchPreview Component */
 .search-preview {
 	transition: 1s;
 	display: flex;
