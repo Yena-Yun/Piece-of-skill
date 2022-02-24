@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { SearchInput } from 'components';
 import { Logo, Hamburger, SearchLinkBtn } from 'assets';
-import LoginSignupBtn from 'utils/constants/LoginSignupBtn';
+import LoginSignupBtn from 'utils/LoginSignupBtn';
 
 const Header = ({ keyword, results, handleChange, handleKeyPress }) => {
   const navigate = useNavigate();
+
   return (
     <Wrapper>
       <InnerWrap>
@@ -123,44 +124,6 @@ const SearchBtn = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-`;
-
-const LogInBtn = styled.button`
-  height: 40px;
-  margin-right: 8px;
-  border: none;
-  padding: 8px 16px;
-  font-size: 16px;
-  line-height: 24px;
-  border-radius: 6px;
-  color: #404040;
-
-  &:hover {
-    color: #2f3ab2;
-    background: #ebecfc;
-    text-decoration: underline solid #2f3ab2;
-  }
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const SignUpBtn = styled.button`
-  height: 40px;
-  margin-right: 8px;
-  color: #3b49df;
-  border: 1px solid #3b49df;
-  padding: 7px 15px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  border-radius: 6px;
-
-  &:hover {
-    background: #3b49df;
-    color: #fff;
   }
 `;
 

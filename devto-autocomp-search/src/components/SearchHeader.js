@@ -1,25 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
+import { NAVITEM } from 'utils/constants/Search';
 
 const SearchHeader = ({ keyword, results, handleChange, handleKeyPress }) => {
-  console.log(typeof keyword);
-  console.log(keyword);
-
   return (
     <Wrapper>
       <SearchInput search keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
       <Title>Search results {keyword && `for ${keyword}`}</Title>
       <NavList>
-        <NavItem>
-          <a href='/'>Most Relevant</a>
-        </NavItem>
-        <NavItem>
-          <a href='/'>Newest</a>
-        </NavItem>
-        <NavItem>
-          <a href='/'>Oldest</a>
-        </NavItem>
+        {NAVITEM.map((item, idx) => (
+          <NavItem key={idx}>
+            <a href='/'>{item}</a>
+          </NavItem>
+        ))}
       </NavList>
     </Wrapper>
   );
