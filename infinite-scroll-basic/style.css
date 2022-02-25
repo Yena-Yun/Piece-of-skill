@@ -1,0 +1,16 @@
+html,
+body {
+  margin: 0;
+}
+
+section .box {
+  height: 500px;
+  background: tomato;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 30px 10px;
+}
+
+section .box:nth-child(2n) {
+  background: teal;
+}
