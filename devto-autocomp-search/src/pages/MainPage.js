@@ -58,7 +58,7 @@ const MainPage = () => {
 
   return (
     <>
-      <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} setKeyword={setKeyword} />
+      <Header keyword={keyword} results={results} handleChange={handleChange} handleKeyPress={handleKeyPress} />
     </>
   );
 };

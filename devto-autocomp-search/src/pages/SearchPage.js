@@ -7,6 +7,7 @@ import { Header, ResultCard, SearchHeader, SideNav } from 'components';
 const SearchPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [results, setResults] = useState([]);
@@ -42,7 +43,7 @@ const SearchPage = () => {
   const matchInput = (target, keyword) => {
     target = target.toLowerCase();
     if (keyword) keyword = keyword.toString().toLowerCase();
-    return target.includes(keyword); // true or false
+    return target.includes(keyword);
   };
 
   const handleSubmit = () => {

@@ -28,7 +28,6 @@ const ImagePicker = (): JSX.Element => {
       if (pickIndex === idx) {
         return;
       }
-
       setPickIndex(idx);
     },
     [pickIndex]
