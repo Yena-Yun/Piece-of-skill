@@ -5,6 +5,7 @@ body {
 
 section .box {
   height: 500px;
+  /* 박스는 기본적으로 전부 tomato색 */
   background: tomato;
   color: #fff;
   box-sizing: border-box;
@@ -12,5 +13,6 @@ section .box {
 }
 
 section .box:nth-child(2n) {
+  /* 짝수번째 박스일 때는 teal색으로 변경 */
   background: teal;
 }
